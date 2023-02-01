@@ -1,8 +1,6 @@
-env: # Environment variables to pass to all tasks
-    CIRRUS_CLONE_DEPTH: 1 # No need to clone with the whole history
-    CIRRUS_WORKING_DIR: "/tmp/ci" # Where to clone the aosp-builder repo
-
-# store our secrets here
+env:
+    CIRRUS_CLONE_DEPTH: 1
+    CIRRUS_WORKING_DIR: "/tmp/ci"
     github_token: "ENCRYPTED[!31158efa061e19ed9135e14a1f14213d2a346bfc19a0aeffc71aa37fbe3e95a19abf86b8d51010af4a211ef2c72e696b!]
     bot_api: "ENCRYPTED[!e181a8ee755c0f578bd6d9c57b6dc7baa2731b64a2edd880112ddbe2734fa38ea2240705b083eb2cb3a9bf1499ca90c7!]"
     chat_id: ""
