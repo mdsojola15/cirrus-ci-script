@@ -6,7 +6,7 @@ task:
     name: aosp
     timeout_in: 260m
     container:
-      image: aarunalr/aosp-build
+      image: apon77/aosp:cirrus
       cpu: 8
       memory: 32G
     download_ccache_background_script: # To download ccache in background
