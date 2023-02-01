@@ -1,0 +1,31 @@
+env: # Environment variables to pass to all tasks
+    CIRRUS_CLONE_DEPTH: 1 # No need to clone with the whole history
+    CIRRUS_WORKING_DIR: "/tmp/ci" # Where to clone the aosp-builder repo
+
+# store our secrets here
+    github_token: "ENCRYPTED[!31158efa061e19ed9135e14a1f14213d2a346bfc19a0aeffc71aa37fbe3e95a19abf86b8d51010af4a211ef2c72e696b!]
+    bot_api: "ENCRYPTED[!e181a8ee755c0f578bd6d9c57b6dc7baa2731b64a2edd880112ddbe2734fa38ea2240705b083eb2cb3a9bf1499ca90c7!]"
+    chat_id: ""
+
+# store information about git here
+    gmail: sa_sajjad@outlook.com
+
+task:
+    name: aosp
+    timeout_in: 260m
+    container:
+      image: aarunalr/aosp-build
+      cpu: 8
+      memory: 32G
+    download_ccache_background_script: # To download ccache in background
+      - curl -o /tmp/ci/function https://raw.githubusercontent.com/qwry3657/cirrus/main/function
+      - curl -o /tmp/ci/download_ccache https://raw.githubusercontent.com/qwry3657/cirrus/main/download_ccache
+      - bash download_ccache # Ccache download script
+    sync_script:
+      - bash sync
+    build_script:
+      - curl -o build https://raw.githubusercontent.com/qwry3657/cirrus/main/build
+      - bash build
+    upload_ccache_script: # Upload ccache to cloud foreground
+      - curl -o upload_ccache https://raw.githubusercontent.com/qwry3657/cirrus/main/upload_ccache
+      - bash upload_ccache # Ccache uploading script
